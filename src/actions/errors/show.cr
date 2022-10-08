@@ -14,6 +14,14 @@ class Errors::Show < Lucky::ErrorAction
     end
   end
 
+  def render(error : PermissionDeniedError)
+    if html?
+      error_html "Permission denied", status: 403
+    else
+      error_json "Permission denied", status: 403
+    end
+  end
+
   # When the request is JSON and an InvalidOperationError is raised, show a
   # helpful error with the param that is invalid, and what was wrong with it.
   def render(error : Avram::InvalidOperationError)

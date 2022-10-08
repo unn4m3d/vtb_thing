@@ -4,10 +4,18 @@ class SaveItem < Item::SaveOperation
   permit_columns identifier
   file_attribute :pic
 
+  needs current_user : User
+
   before_save do
     pic.value.try do |pv|
       upload_pic pv
     end
+  end
+
+  before_save check_perms
+
+  def check_perms
+    identifier.add_error("You're not an admin, man") unless current_user.admin
   end
 
   private def upload_pic(pic)
@@ -21,6 +29,11 @@ class SaveItem < Item::SaveOperation
     end
 
     pic_id.value = result.id
+    if pic_id.value.nil?
+      uri.value = ""
+    else
+      uri.value = Shrine.find_storage("store").url(pic_id.value.not_nil!)
+    end
   end
 
   private def delete_old_profile_image(old_image)

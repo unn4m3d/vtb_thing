@@ -7,7 +7,7 @@ class Activity < BaseModel
 
   table do
     column title : String
-    column next_time : Time
+    column next_time : Time?
     column a_type : Activity::Type
     has_many attempts : Attempt
   end

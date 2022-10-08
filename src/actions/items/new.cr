@@ -1,5 +1,8 @@
 class Items::New < BrowserAction
   get "/items/new" do
-    html NewPage, operation: SaveItem.new
+    unless current_user.admin
+      raise PermissionDeniedError.new
+    end
+    html NewPage, operation: SaveItem.new(current_user: current_user)
   end
 end

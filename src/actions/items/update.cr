@@ -1,7 +1,7 @@
 class Items::Update < BrowserAction
   put "/items/:item_id" do
     item = ItemQuery.find(item_id)
-    SaveItem.update(item, params) do |operation, updated_item|
+    SaveItem.update(item, params, current_user: current_user) do |operation, updated_item|
       if operation.saved?
         flash.success = "The record has been updated"
         redirect Show.with(updated_item.id)

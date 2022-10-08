@@ -4,7 +4,9 @@ class Items::IndexPage < MainLayout
 
   def content
     h1 "All Items"
-    link "New Item", to: Items::New
+    if current_user.admin
+      link "New Item", to: Items::New
+    end
     render_items
   end
 
@@ -12,7 +14,7 @@ class Items::IndexPage < MainLayout
     ul do
       items.each do |item|
         li do
-          link item.uri, Items::Show.with(item)
+          link item.identifier, Items::Show.with(item)
         end
       end
     end

@@ -7,12 +7,20 @@ class WalletHelper
     BASE_ADDR = "https://hackathon.lsp.team/hk"
 
     private def post(method : String, params : String?)
-        response = HTTP::Client.post("#{BASE_ADDR}/#{method}", body: params)
+        unless params.nil?
+            params = "\n#{params}"
+        end
+
+        uri = "#{BASE_ADDR}/#{method}"
+        response = HTTP::Client.post(uri, headers: HTTP::Headers{"User-Agent" => "AwesomeApp", "Content-Type"=> "application/json"}, body: params)
 
         if response.success?
+            puts response.body
             response.body
         else
-            raise response.status.to_s
+            puts "#{BASE_ADDR}/#{method}"
+            puts params
+            raise "#{response.status.to_s} : #{response.body}"
         end
     end
 
@@ -22,7 +30,7 @@ class WalletHelper
         if response.success?
             response.body
         else
-            raise response.status.to_s
+            raise "#{response.status.to_s} : #{response.body}"
         end
     end
 
@@ -68,7 +76,6 @@ class WalletHelper
     class TransactionHash
         include JSON::Serializable
 
-        @[JSON::Field(key: "transactionHash")]
         property transaction_hash : String
     end
 
@@ -91,6 +98,6 @@ class WalletHelper
     end
 
     def gen_collection(uri, count)
-        post("v1/nft/generate", {uri: uri, nftCount: count, toPublicKey: @pubkey}, TransactionHash).transaction_hash
+        post("v1/nft/generate", {toPublicKey: @pubkey, uri: uri, nftCount: count}, TransactionHash).transaction_hash
     end
 end

@@ -8,7 +8,7 @@ class Items::NewPage < MainLayout
   end
 
   def render_item_form(op)
-    form_for Items::Create do
+    form_for Items::Create, multipart:true  do
       # Edit fields in src/components/items/form_fields.cr
       mount Items::FormFields, op
 
