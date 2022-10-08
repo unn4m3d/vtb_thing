@@ -11,6 +11,7 @@ class User < BaseModel
     column message : String?
     column bio : String?
     has_many attempts : Attempt
+    column profile_pic_id : String
   end
 
   def emailable : Carbon::Address
