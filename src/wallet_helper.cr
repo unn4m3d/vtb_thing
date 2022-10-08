@@ -28,6 +28,7 @@ class WalletHelper
         response = HTTP::Client.get("#{BASE_ADDR}/#{method}")
 
         if response.success?
+            puts response.body
             response.body
         else
             raise "#{response.status.to_s} : #{response.body}"
@@ -59,7 +60,6 @@ class WalletHelper
     class NFTBalanceEntry
         include JSON::Serializable
 
-        @[JSON::Field(key: "URI")]
         property uri : String
 
         property tokens : Array(Int64)
@@ -76,6 +76,13 @@ class WalletHelper
     class TransactionHash
         include JSON::Serializable
 
+        property transaction_hash : String
+    end
+
+    class TransactionHash2
+        include JSON::Serializable
+
+        @[JSON::Field(key: "transaction")]
         property transaction_hash : String
     end
 
@@ -132,13 +139,15 @@ class WalletHelper
     end
 
     def transfer_rub(from, to, count)
-        post("v1/transfers/ruble", {fromPrivateKey: from, toPublicKey: to, amount: count}, TransactionHash).transaction_hash
+        post("v1/transfers/ruble", {fromPrivateKey: from, toPublicKey: to, amount: count}, TransactionHash2).transaction_hash
     end
 end
 
 spawn do
     loop do
         sleep 60
+
+        puts "Aw fuck me"
 
         TransactionQuery.new.status(WalletHelper::TransactionStatus::Pending).each do |transaction|
             new_status = transaction.transaction_status

@@ -24,4 +24,8 @@ class User < BaseModel
 
     ItemQuery.new.uri.in wallet.nft_balance.map &.uri
   end
+
+  def wallet_helper
+    WalletHelper.new wallet_privkey, wallet_pubkey
+  end
 end

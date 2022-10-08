@@ -5,7 +5,7 @@ class Transaction < BaseModel
     column tow : String
     column content : String
     column status : WalletHelper::TransactionStatus
-    column hash : String
+    column hash : String?
     belongs_to chained : Transaction?
   end
 
@@ -14,7 +14,7 @@ class Transaction < BaseModel
     if status.deferred?
       WalletHelper::TransactionStatus::Deferred
     else
-      WALLET.status hash
+      WALLET.status hash.not_nil!
     end
   end
 
@@ -38,7 +38,8 @@ class Transaction < BaseModel
   end
 
   def success_hook
-    chained.not_nil!.apply unless chained.nil?
+    ch = TransactionQuery.preload_chained(self).chained
+    ch.not_nil!.apply unless ch.nil?
   end
 
   def failure_hook

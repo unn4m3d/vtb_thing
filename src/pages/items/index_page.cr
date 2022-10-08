@@ -14,7 +14,7 @@ class Items::IndexPage < MainLayout
     ul do
       items.each do |item|
         li do
-          link item.identifier, Items::Show.with(item)
+          link item.identifier, to: Items::Buy.with(item)
         end
       end
     end
