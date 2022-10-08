@@ -1,5 +1,13 @@
 class Attempt < BaseModel
+  enum Status
+    InProgress = 0
+    Complete = 1
+  end
+  
   table do
-    column title : String
+    belongs_to user : User
+    belongs_to activity : Activity
+
+    column status : Attempt::Status
   end
 end

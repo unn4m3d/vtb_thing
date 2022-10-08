@@ -12,7 +12,7 @@ class Attempts::IndexPage < MainLayout
     ul do
       attempts.each do |attempt|
         li do
-          link attempt.title, Attempts::Show.with(attempt)
+          link "attempt", to: Attempts::Show.with(attempt)
         end
       end
     end

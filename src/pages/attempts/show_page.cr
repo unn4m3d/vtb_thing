@@ -23,7 +23,7 @@ class Attempts::ShowPage < MainLayout
     ul do
       li do
         text "title: "
-        strong attempt.title.to_s
+        #strong attempt.title.to_s
       end
     end
   end
