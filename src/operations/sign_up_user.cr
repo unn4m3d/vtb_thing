@@ -10,5 +10,11 @@ class SignUpUser < User::SaveOperation
   before_save do
     validate_uniqueness_of email
     Authentic.copy_and_encrypt(password, to: encrypted_password) if password.valid?
+
+    puts "fuck you"
+    wallet = WalletHelper.new
+    wallet_privkey.value = wallet.privkey
+    wallet_pubkey.value = wallet.pubkey
+    puts "fuck me"
   end
 end
