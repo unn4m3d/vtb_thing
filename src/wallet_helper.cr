@@ -100,4 +100,70 @@ class WalletHelper
     def gen_collection(uri, count)
         post("v1/nft/generate", {toPublicKey: @pubkey, uri: uri, nftCount: count}, TransactionHash).transaction_hash
     end
+
+    class TransactionStatusImpl
+        include JSON::Serializable
+
+        property status : String
+    end
+
+    enum TransactionStatus
+        Deferred
+        Pending
+        Success
+        Failure
+    end
+
+    def status(thash : String)
+        case get("v1/transfers/status/#{thash}/", TransactionStatusImpl).status
+        when "Success"
+            TransactionStatus::Success
+        when "Pending"
+            TransactionStatus::Pending
+        else
+            TransactionStatus::Failure
+        end
+    rescue
+        TransactionStatus::Failure
+    end
+
+    def transfer_nft(from, to, id)
+        post("v1/transfers/nft", {fromPrivateKey: from, toPublicKey: to, tokenId: id}, TransactionHash).transaction_hash
+    end
+
+    def transfer_rub(from, to, count)
+        post("v1/transfers/ruble", {fromPrivateKey: from, toPublicKey: to, amount: count}, TransactionHash).transaction_hash
+    end
+end
+
+spawn do
+    loop do
+        sleep 60
+
+        TransactionQuery.new.status(WalletHelper::TransactionStatus::Pending).each do |transaction|
+            new_status = transaction.transaction_status
+
+            unless new_status.pending?
+                SaveTransaction.update(transaction, status: new_status) do |op, _|
+                    if op.saved?
+                        transaction.success_hook
+                    else
+                        puts "man..."
+                    end
+                end
+            end
+        end
+
+        nft_balance = WALLET.nft_balance
+
+        ItemQuery.new.token_id(0).each do |item|
+            token = nft_balance.select(&.uri.==(item.uri)).first?
+
+            unless token.nil?
+                SaveItem.update(item, current_user: UserQuery.find(1), token_id: token.tokens.first) do |_, _|
+
+                end
+            end
+        end
+    end
 end
