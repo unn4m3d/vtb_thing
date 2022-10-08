@@ -10,7 +10,7 @@ class Items::EditPage < MainLayout
   end
 
   def render_item_form(op)
-    form_for Items::Update.with(item.id) do
+    form_for Items::Update.with(item.id), multipart: true do
       # Edit fields in src/components/items/form_fields.cr
       mount Items::FormFields, op
 
