@@ -13,15 +13,6 @@ abstract class AuthLayout
   end
 
   def render
-    html_doctype
-
-    html lang: "en" do
-      mount Shared::LayoutHead, page_title: page_title
-
-      body do
-        mount Shared::FlashMessages, context.flash
-        content
-      end
-    end
+    render_template "auth_layout.ecr"
   end
 end

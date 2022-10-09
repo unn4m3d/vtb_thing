@@ -1,21 +1,29 @@
 class SaveItem < Item::SaveOperation
   # To save user provided params to the database, you must permit them
   # https://luckyframework.org/guides/database/saving-records#perma-permitting-columns
-  permit_columns identifier, price
+  permit_columns identifier, price, category, token_id, uri
   file_attribute :pic
 
   needs current_user : User
 
   before_save do
+    if pic.value.nil? && uri.value.nil?
+      uri.value = "none"
+    end
     pic.value.try do |pv|
       upload_pic pv
     end
+
+    status.value = Item::Status::Active
   end
 
   before_save check_perms
 
   def check_perms
-    identifier.add_error("You're not an admin, man") unless current_user.admin
+    unless current_user.admin
+      puts "not an admin"
+      identifier.add_error("You're not an admin, man") 
+    end
   end
 
   private def upload_pic(pic)
@@ -30,7 +38,7 @@ class SaveItem < Item::SaveOperation
 
     pic_id.value = result.id
     if pic_id.value.nil?
-      uri.value = ""
+      uri.value = "none"
     else
       uri.value = Shrine.find_storage("store").url(pic_id.value.not_nil!)
     end

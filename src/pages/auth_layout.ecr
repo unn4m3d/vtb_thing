@@ -1,0 +1,9 @@
+<!doctype html>
+<html>
+    <% mount Shared::LayoutHead, page_title: page_title %>
+    <body class="text-center auth">
+        
+        <% content %>
+        <% mount Shared::FlashMessages, context.flash %>
+    </body>
+</html>

@@ -3,7 +3,7 @@ class Items::ShowPage < MainLayout
   quick_def page_title, "Item with id: #{item.id}"
 
   def content
-    link "Back to all Items", Items::Index
+    #link "Back to all Items", Items::Index
     h1 "Item with id: #{item.id}"
     render_actions
     render_item_fields

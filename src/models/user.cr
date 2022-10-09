@@ -28,4 +28,12 @@ class User < BaseModel
   def wallet_helper
     WalletHelper.new wallet_privkey, wallet_pubkey
   end
+
+  def pic_url
+    if profile_pic_id.nil?
+      ""
+    else
+      Shrine.find_storage("store").url(profile_pic_id.not_nil!)
+    end
+  end
 end

@@ -76,6 +76,10 @@ shards:
     git: https://github.com/crystal-community/jwt.git
     version: 1.6.0
 
+  kilt:
+    git: https://github.com/jeromegn/kilt.git
+    version: 0.6.1
+
   lucky:
     git: https://github.com/luckyframework/lucky.git
     version: 1.0.0-rc1

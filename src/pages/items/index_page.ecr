@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <% link "+", to: Items::New %>
+        <div class="catalog container">
+            <div class="catalog__grid">
+                <% items.each do |item| %>
+                    <div class="catalog__item">
+                        <div class="catalog__item-imgwrapper">
+                            <img class="catalog__item-img" src="<%= item.pic_url %>" alt="...">
+                            <div class="catalog__item-overlay"></div>
+                            <button type="button" class="catalog__item-button">
+                                <img src="img/basket.svg" alt="Добавить в корзину" class="catalog__item-btnimg">
+                                <span class="catalog__item-btntxt">Add to cart</span>
+                            </button>
+                        </div>
+                        <h3 class="catalog__item-heading"><%= HTML.escape item.identifier%></h3>
+                        <p class="catalog__item-price"><%= item.price %></p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

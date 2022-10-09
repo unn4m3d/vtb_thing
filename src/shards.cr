@@ -9,3 +9,16 @@ require "carbon"
 require "authentic"
 require "jwt"
 require "shrine"
+require "kilt"
+
+module Lucky::HTMLBuilder
+    macro render_template(template)
+        Kilt.embed "src/pages/{{template.id}}", io_name: view
+    end
+end
+
+module HTML
+    def self.escape(x : Nil)
+        ""
+    end
+end

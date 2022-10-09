@@ -5,7 +5,7 @@ class CreateActivities::V20221008100139 < Avram::Migrator::Migration::V1
       primary_key id : Int64
       add_timestamps
       add title : String
-      add next : Time
+      add next_time : Time
     end
   end
 

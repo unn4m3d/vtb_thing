@@ -38,6 +38,8 @@ dependencies:
   shrine:
     github: jetrockets/shrine.cr
     branch: master
+  kilt:
+    github: jeromegn/kilt
 development_dependencies:
   lucky_flow:
     github: luckyframework/lucky_flow

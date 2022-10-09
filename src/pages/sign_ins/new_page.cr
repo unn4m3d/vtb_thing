@@ -2,8 +2,7 @@ class SignIns::NewPage < AuthLayout
   needs operation : SignInUser
 
   def content
-    h1 "Sign In"
-    render_sign_in_form(@operation)
+    render_template "sign_ins/new_page.ecr"
   end
 
   private def render_sign_in_form(op)
@@ -17,7 +16,7 @@ class SignIns::NewPage < AuthLayout
   end
 
   private def sign_in_fields(op)
-    mount Shared::Field, attribute: op.email, label_text: "Email", &.email_input(autofocus: "true")
-    mount Shared::Field, attribute: op.password, label_text: "Password", &.password_input
+    mount Shared::Field, attribute: op.email, label_text: "E-mail", &.email_input(autofocus: "true")
+    mount Shared::Field, attribute: op.password, label_text: "Пароль", &.password_input
   end
 end

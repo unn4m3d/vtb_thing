@@ -1,5 +1,6 @@
 class Items::Index < BrowserAction
-  get "/items" do
-    html IndexPage, items: ItemQuery.new
+
+  get "/items" do #TODO: Remove category
+    html IndexPage, items: ItemQuery.new.active
   end
 end

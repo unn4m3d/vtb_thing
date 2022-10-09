@@ -3,11 +3,7 @@ class Items::IndexPage < MainLayout
   quick_def page_title, "All Items"
 
   def content
-    h1 "All Items"
-    if current_user.admin
-      link "New Item", to: Items::New
-    end
-    render_items
+    render_template "items/index_page.ecr"
   end
 
   def render_items

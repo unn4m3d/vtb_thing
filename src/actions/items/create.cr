@@ -7,6 +7,8 @@ class Items::Create < BrowserAction
         redirect Show.with(item.id)
       else
         flash.failure = "It looks like the form is not valid"
+
+        operation.errors.each do |x| puts x.to_s end
         html NewPage, operation: operation
       end
     end

@@ -1,18 +1,20 @@
 class Me::ShowPage < MainLayout
   def content
-    h1 "This is your profile"
-    h3 "Email:  #{@current_user.email}"
+    # h1 "This is your profile"
+    # h3 "Email:  #{@current_user.email}"
 
-    wallet = WalletHelper.new @current_user.wallet_privkey, @current_user.wallet_pubkey
+    # wallet = WalletHelper.new @current_user.wallet_privkey, @current_user.wallet_pubkey
 
 
 
-    h3 "Balance: "
-    wallet.balance.each do |k,v|
-      para "#{k}: #{v}"
-    end
-    para "Pubkey: #{@current_user.wallet_pubkey}"
-    helpful_tips
+    # h3 "Balance: "
+    # wallet.balance.each do |k,v|
+    #   para "#{k}: #{v}"
+    # end
+    # para "Pubkey: #{@current_user.wallet_pubkey}"
+    # helpful_tips
+    
+    render_template "me/show_page.ecr"
   end
 
   private def helpful_tips

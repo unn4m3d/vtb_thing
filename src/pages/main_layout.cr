@@ -24,22 +24,7 @@ abstract class MainLayout
   end
 
   def render
-    html_doctype
-
-    html lang: "en" do
-      mount Shared::LayoutHead, page_title: page_title
-
-      body do
-        mount Shared::FlashMessages, context.flash
-        render_signed_in_user
-        content
-      end
-    end
+    render_template "main_layout.ecr"
   end
 
-  private def render_signed_in_user
-    text current_user.email
-    text " - "
-    link "Sign out", to: SignIns::Delete, flow_id: "sign-out-button"
-  end
 end

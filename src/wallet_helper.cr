@@ -147,15 +147,13 @@ spawn do
     loop do
         sleep 60
 
-        puts "Aw fuck me"
-
         TransactionQuery.new.status(WalletHelper::TransactionStatus::Pending).each do |transaction|
             new_status = transaction.transaction_status
 
             unless new_status.pending?
                 SaveTransaction.update(transaction, status: new_status) do |op, _|
                     if op.saved?
-                        transaction.success_hook
+                        new_status.success? ? transaction.success_hook : transaction.failure_hook
                     else
                         puts "man..."
                     end

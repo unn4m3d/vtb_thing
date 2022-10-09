@@ -4,7 +4,7 @@ class Items::EditPage < MainLayout
   quick_def page_title, "Edit Item with id: #{item.id}"
 
   def content
-    link "Back to all Items", Items::Index
+    #link "Back to all Items", Items::Index.with("")
     h1 "Edit Item with id: #{item.id}"
     render_item_form(operation)
   end

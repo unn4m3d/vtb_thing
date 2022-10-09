@@ -1,0 +1,9 @@
+<div class="form-signin">
+    <% form_for SignUps::Create do %>
+        <h1 class="h3 mb-3 fw-normal text-start">Регистрация</h1>
+    
+        <% sign_up_fields(@operation) %>
+        <% submit "Зарегистрироваться", class: "w-100 btn btn-lg btn-primary" %>
+        <% link "Войти", to: SignIns::New %>
+    <% end %>
+</div>

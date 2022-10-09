@@ -1,66 +1,212 @@
-// Lucky generates 3 folders to help you organize your CSS:
-//
-//    - src/css/variables # Files for colors, spacing, etc.
-//    - src/css/mixins # Put your mixin functions in files here
-//    - src/css/components # CSS for your components
-//
-// Remember to import your new CSS files or they won't be loaded:
-//
-//    @import "./variables/colors" # Imports the file in src/css/variables/_colors.scss
-//
-// Note: importing with `~` tells webpack to look in the installed npm packages
-// https://stackoverflow.com/questions/39535760/what-does-a-tilde-in-a-css-url-do
-
 @import 'modern-normalize/modern-normalize.css';
-// Add your own components and import them like this:
-//
-// @import "components/my_new_component";
+@import "~bootstrap/scss/bootstrap";
 
-// Default Lucky styles.
-// Delete these when you're ready to bring in your own CSS.
-body {
-  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
-    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 20px 40px;
+html, body, .content {
+  height:100%;
 }
 
-label, input {
-  display: flex;
-}
 
-label {
-  font-weight: 500;
-}
-
-[type='color'],
-[type='date'],
-[type='datetime'],
-[type='datetime-local'],
-[type='email'],
-[type='month'],
-[type='number'],
-[type='password'],
-[type='search'],
-[type='tel'],
-[type='text'],
-[type='time'],
-[type='url'],
-[type='week'],
-input:not([type]),
-textarea {
-  border-radius: 3px;
-  border: 1px solid #bbb;
-  margin: 7px 0 14px 0;
-  max-width: 400px;
-  padding: 8px 6px;
+.form-signin {
+  max-width: 330px;
+  border: 3px solid blue;
+  border-radius: 15px;
+  padding: 15px;
+  margin: auto;
   width: 100%;
+  border-top: 35px solid blue;
 }
 
-[type='submit'] {
-  font-weight: 900;
-  margin: 9px 0;
-  padding: 6px 9px;
+body.auth {
+display: flex;
+align-items: center;
+padding-top: 40px;
+padding-bottom: 40px;
+background-color: #f5f5f5;
+
+  .mb-4{
+    text-align: right; 
+    right: 5px; top: 5px;
+    
+  }   
 }
+
+html, body, .content {
+  height:100%;
+  background: url(/backfon.svg) no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+}
+
+.form-signin .checkbox {
+font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+z-index: 2;
+}
+
+.form-signin input[type="email"] {
+margin-bottom: -1px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+
+.alert {
+  z-index: 9999 !important;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+}
+
+.catalog {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.vtb-padding {
+    margin: 25px;
+    background: #000 url(/fonreg.svg);  
+  max-width: 330px;
+    /*border: 3px solid blue;*/
+    border-radius: 15px;
+    padding: 15px;
+    margin: auto;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background-color: #F8F8F8;
+}
+
+.catalog__item {  
+    margin: 25px;
+    background: #000 url(/fonreg.svg);  
+  max-width: 330px;
+  max-height: 600px;
+    /*border: 3px solid blue;*/
+    border-radius: 15px;
+    padding: 15px;
+    margin: auto;
+    width: 100%;
+   /* width: 360px;*/
+    /*min-height: 581px;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background-color: #F8F8F8;
+    /*margin: 0;*/
+  }
+  
+  .catalog__item-heading {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 25px 18px 12px 18px;
+  }
+  
+  .catalog__item-text {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    font-style: normal;
+    color: #5D5D5D;
+    margin: 0 18px 0 18px;
+  }
+  
+  .catalog__item-price {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    font-style: normal;
+    color: #F16D7F;
+    margin: 18px 18px 20px 18px;
+  }
+  
+  .catalog__item-imgwrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .catalog__item-img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .catalog__item:hover .catalog__item-overlay {
+    display: block;
+  }
+  
+  .catalog__item:hover .catalog__item-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .catalog__item-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(58, 56, 56, 0.86);
+    position: absolute;
+    top: 0;
+    display: none;
+  }
+  
+  .catalog__item-button {
+    border: 1px solid #FFFFFF;
+    display: none;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 13px 15px 13px 15px;
+    min-width: 138px;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  
+  .catalog__item-btntxt {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+  }

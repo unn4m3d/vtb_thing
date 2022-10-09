@@ -18,14 +18,23 @@ class Transaction < BaseModel
     end
   end
 
-  def apply
-    type, _, info = content.partition(':')
+  def t_type
+    type, _, _ = content.partition(':')
+    type
+  end
 
-    th = case type.downcase
+  def desc
+    _, _, info = content.partition(':')
+
+    return info
+  end
+
+  def apply
+    th = case t_type.downcase
     when "rub"
-        WALLET.transfer_rub(fromw, tow, info.to_i32)
+        WALLET.transfer_rub(fromw, tow, desc.to_i32)
     when "nft"
-        WALLET.transfer_nft(fromw, tow, info.to_i32)
+        WALLET.transfer_nft(fromw, tow, desc.to_i32)
     else
         ""
     end
@@ -38,11 +47,16 @@ class Transaction < BaseModel
   end
 
   def success_hook
-    ch = TransactionQuery.preload_chained(self).chained
-    ch.not_nil!.apply unless ch.nil?
+    TransactionQuery.preload_chained(self).chained.try &.apply
   end
 
   def failure_hook
+    if t_type == "nft"
+      nft = ItemQuery.find(desc.to_i64)
 
+      if nft.status.locked?
+        SaveItem.update(nft, current_user: UserQuery.find(1), status: Item::Status::Active) {|_,_|}
+      end
+    end
   end
 end

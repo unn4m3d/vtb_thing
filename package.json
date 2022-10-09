@@ -2,8 +2,12 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "@rails/ujs": "^6.0.0",
-    "modern-normalize": "^1.1.0"
+    "bootstrap": "^5.2.2",
+    "jquery": "^3.6.1",
+    "modern-normalize": "^1.1.0",
+    "popper.js": "^1.16.1"
   },
   "scripts": {
     "heroku-postbuild": "yarn prod",
