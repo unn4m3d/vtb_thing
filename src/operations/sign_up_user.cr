@@ -19,6 +19,10 @@ class SignUpUser < User::SaveOperation
     profile_pic.value.try do |pic|
       upload_pic pic
     end
+
+    if UserQuery.new.select_count == 0
+      admin.value = true
+    end
   end
 
   private def upload_pic(pic)

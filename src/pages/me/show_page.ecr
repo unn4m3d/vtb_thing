@@ -7,16 +7,18 @@
     <p><%= HTML.escape current_user.bio %></p>
 </div>
 
-<div class="d-flex flex-column flex-shrink-1 bg-light">
+<div class="d-flex flex-column flex-grow-1 bg-light">
     <!-- shop stuff -->
 
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row justify-content-around">
         <% current_user.wallet_helper.nft_balance.first(4).each do |item| %>
-            <img src="<%= item.uri %>" alt="<%= item.uri %>" class="img-fluid rounded item-icon"/>
+            <div class="d-flex flex-row flew-grow-1 text-center">
+                <img src="<%= item.uri %>" alt="<%= item.uri %>" class="img-fluid rounded item-icon"/>
+            </div>
         <% end %>
     </div>
 
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row flex-grow-1">
         <ul class="list-group">
             <% transactions.each do |tr| %>
                 <li class="list-group-item text-start">

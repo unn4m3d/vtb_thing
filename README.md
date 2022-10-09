@@ -1,14 +1,8 @@
-# vtb_thing
+# Как запустить:
 
-This is a project written using [Lucky](https://luckyframework.org). Enjoy!
-
-### Setting up the project
-
-1. [Install required dependencies](https://luckyframework.org/guides/getting-started/installing#install-required-dependencies)
-1. Update database settings in `config/database.cr`
-1. Run `script/setup`
-1. Run `lucky dev` to start the app
-
-### Learning Lucky
-
-Lucky uses the [Crystal](https://crystal-lang.org) programming language. You can learn about Lucky from the [Lucky Guides](https://luckyframework.org/guides/getting-started/why-lucky).
+1. Нужен дистрибутив Linux или (на Windows) WSL, PostgreSQL 9.4+
+2. Необходимо установить [Crystal](https://crystal-lang.org/install/) и пакетный менеджер Shards, а также [Lucky CLI](https://github.com/luckyframework/lucky_cli)
+3. В папке с проектом выполнить `shards build`
+4. Установить переменные среды: `DB_HOSTNAME`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `WALLET_PRIVKEY`, `WALLET_PUBKEY`
+5. Создать и мигрировать базу данных `lucky db.setup`
+6. Запустить командой `lucky dev` (в dev-режиме)

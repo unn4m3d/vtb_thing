@@ -22,11 +22,11 @@ class Me::ShowPage < MainLayout
   private def badge_class(s)
     case s
     when .success?
-        "badge badge-success"
+        "badge bg-success"
     when .pending?
-        "badge badge-secondary"
+        "badge bg-secondary"
     else
-        "badge badge-danger"
+        "badge bg-danger"
     end
   end
 
