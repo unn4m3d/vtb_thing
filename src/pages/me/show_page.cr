@@ -1,4 +1,6 @@
 class Me::ShowPage < MainLayout
+  needs transactions : TransactionQuery
+
   def content
     # h1 "This is your profile"
     # h3 "Email:  #{@current_user.email}"
@@ -15,6 +17,17 @@ class Me::ShowPage < MainLayout
     # helpful_tips
     
     render_template "me/show_page.ecr"
+  end
+
+  private def badge_class(s)
+    case s
+    when .success?
+        "badge badge-success"
+    when .pending?
+        "badge badge-secondary"
+    else
+        "badge badge-danger"
+    end
   end
 
   private def helpful_tips

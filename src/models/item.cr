@@ -17,6 +17,9 @@ class Item < BaseModel
 
 
   def pic_url
+    if uri != "none"
+      return uri
+    end
     if pic_id.nil?
       return ""
     end

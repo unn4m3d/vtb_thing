@@ -1,10 +1,33 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light vtb-padding text-center" style="width:20%">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
+    <!-- profile -->
+
     <img src="<%= current_user.pic_url %>" class="img-fluid rounded" alt="...">
     <p><%= HTML.escape current_user.message %></p>
     <h3><%= HTML.escape current_user.email %></h3>
     <p><%= HTML.escape current_user.bio %></p>
 </div>
 
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light vtb-padding">
-    
+<div class="d-flex flex-column flex-shrink-1 bg-light">
+    <!-- shop stuff -->
+
+    <div class="d-flex flex-row">
+        <% current_user.wallet_helper.nft_balance.first(4).each do |item| %>
+            <img src="<%= item.uri %>" alt="<%= item.uri %>" class="img-fluid rounded item-icon"/>
+        <% end %>
+    </div>
+
+    <div class="d-flex flex-row">
+        <ul class="list-group">
+            <% transactions.each do |tr| %>
+                <li class="list-group-item text-start">
+                    <span class="<%= badge_class(tr.status) %>"> <%= tr.status.to_s %> <span>
+                    <% if tr.fromw == current_user.wallet_privkey %>
+                        <span class="badge badge-danger">- <%= HTML.escape tr.content %></span>
+                    <% else %>
+                        <span class="badge badge-success">+ <%= HTML.escape tr.content %></span>
+                    <% end %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 </div>
