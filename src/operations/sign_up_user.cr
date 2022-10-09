@@ -9,6 +9,7 @@ class SignUpUser < User::SaveOperation
   file_attribute :profile_pic
 
   before_save do
+    xp.value = 0i64
     validate_uniqueness_of email
     Authentic.copy_and_encrypt(password, to: encrypted_password) if password.valid?
 

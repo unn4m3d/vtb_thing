@@ -9,7 +9,7 @@ class SignUps::NewPage < AuthLayout
   end
 
   private def render_sign_up_form(op)
-    form_for SignUps::Create do
+    form_for SignUps::Create, multipart:true do
       sign_up_fields(op)
       submit "Sign Up", flow_id: "sign-up-button"
     end

@@ -8,6 +8,7 @@ class SignUps::Create < BrowserAction
         sign_in(user)
         redirect to: Home::Index
       else
+        operation.errors.each do |x| puts x.to_s end
         flash.info = "Couldn't sign you up"
         html NewPage, operation: operation
       end

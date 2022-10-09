@@ -1,5 +1,5 @@
 <div class="form-signin">
-    <% form_for SignUps::Create do %>
+    <% form_for SignUps::Create, multipart: true do %>
         <h1 class="h3 mb-3 fw-normal text-start">Регистрация</h1>
     
         <% sign_up_fields(@operation) %>
